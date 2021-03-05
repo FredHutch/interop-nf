@@ -47,6 +47,7 @@ process extractStats {
     file "percent_base_plot.png"
     file "run_stats.html"
     file "max_intensity.pdf"
+    file "occupancy.pdf" optional true
 
     """#!/bin/bash
 
@@ -55,6 +56,8 @@ set -Eeuo pipefail
 interop_helper.py input/
 
 plot_tile_intensity.py input/
+
+plot_occupancy.py input/
     """
 
 }
