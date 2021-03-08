@@ -43,9 +43,9 @@ process extractStats {
     path interop_inputs, stageAs: 'input/InterOp/'
 
     output:
-    file "qc_metrics.json"
-    file "percent_base_plot.png"
+    file "run_stats.json"
     file "run_stats.html"
+    file "percent_base.pdf"
     file "max_intensity.pdf"
     file "occupancy.pdf" optional true
 
@@ -53,7 +53,9 @@ process extractStats {
 
 set -Eeuo pipefail
 
-interop_helper.py input/
+run_summary.py input/
+
+plot_percent_base.py input
 
 plot_tile_intensity.py input/
 
