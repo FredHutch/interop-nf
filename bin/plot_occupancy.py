@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
-from interop import py_interop_run_metrics, py_interop_run, py_interop_table
-import numpy as np
 import os
+import sys
+
+import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 import seaborn as sns
-import sys
-import matplotlib.pyplot as plt
+from interop import py_interop_run_metrics, py_interop_run, py_interop_table
 from matplotlib.backends.backend_pdf import PdfPages
 
 
@@ -48,8 +49,12 @@ def plot_occupancy(run_folder, output_pdf="occupancy.pdf"):
 
     # If there is no data
     if df.shape[0] == 0:
-
         # Stop
+        return
+
+    # % Occupied only available on NovaSeq
+    if "% Occupied" not in df:
+        print("Occupancy plot skipped, no data available")
         return
 
     # Otherwise
@@ -87,7 +92,4 @@ if __name__ == "__main__":
     run_folder = sys.argv[1]
     assert os.path.exists(run_folder), f"Input path must exist ({run_folder})"
 
-    try:
-        plot_occupancy(run_folder)
-    except:
-        print("No occupancy data available")
+    plot_occupancy(run_folder)
