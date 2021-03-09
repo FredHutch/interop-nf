@@ -20,6 +20,7 @@ def plot_percent_base(run_folder: str, output_pdf="percent_base.pdf"):
     # Initialize interop objects
     run_metrics = py_interop_run_metrics.run_metrics()
     valid_to_load = py_interop_run.uchar_vector(py_interop_run.MetricCount, 0)
+    py_interop_run_metrics.list_summary_metrics_to_load(valid_to_load)
 
     # Read from the run folder
     run_metrics.read(run_folder, valid_to_load)

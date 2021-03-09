@@ -105,7 +105,7 @@ class RunSummary:
         read_tables = ''.join([
             f"""
               <br>
-              <strong>Read {read_num + 1}</strong> 
+              <strong>Read {read_num + 1}</strong>
               {self.get_read_summary(read_num).to_html(index=False, border=0, classes=['sav-table'])}
               """
             for read_num in range(0, self.summary.size())
