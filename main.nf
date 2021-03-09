@@ -55,7 +55,7 @@ set -Eeuo pipefail
 
 run_summary.py input/
 
-plot_percent_base.py input
+plot_percent_base.py input/
 
 plot_tile_intensity.py input/
 
