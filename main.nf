@@ -70,8 +70,8 @@ workflow {
     // Extract the JSON with quality metrics from the
     // xml files in the input folder
     extractStats(
-        Channel.fromPath("${params.runDir}**xml").toSortedList(),
-        Channel.fromPath("${params.runDir}**InterOp/*bin").toSortedList(),
+        Channel.fromPath("${params.runDir}*xml").toSortedList(),
+        Channel.fromPath("${params.runDir}InterOp/*bin").toSortedList(),
     )
 
 }
