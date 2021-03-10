@@ -2,13 +2,15 @@ import math
 from typing import Union, List
 
 
-class ColumnDef(object):
-    """ Represents a data value from the Illumina InterOp output """
+class ColumnDef:
+    """
+     Represents a data value from the Illumina InterOp output
+    """
     def __init__(self, name: str, field: Union[str, List[str]], **kwargs):
         self.name = name
 
         # Allow multiple fields in one 'cell'
-        if type(field) is str:
+        if isinstance(field, str):
             self.fields = [field]
         else:
             self.fields = field
@@ -47,8 +49,8 @@ class ColumnDef(object):
             if first == last:
                 return self._format(first)
             return f'{self._format(first)} - {self._format(last)}'
-        else:
-            return self._format(value)
+
+        return self._format(value)
 
     def _format(self, value):
         value = value / self.scale

@@ -190,9 +190,9 @@ if __name__ == "__main__":
 
     # Extract the JSON summary
     table_json = summary.get_table_json()
-    with open('run_stats.json', 'wt') as handle_out:
+    with open('run_metrics.json', 'wt') as handle_out:
         handle_out.write(table_json)
 
     table_html = summary.get_table_html()
-    with open('run_stats.html', 'wt') as handle_out:
+    with open('run_metrics.html', 'wt') as handle_out:
         handle_out.write(table_html)
