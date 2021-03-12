@@ -8,10 +8,16 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from interop import py_interop_run_metrics, py_interop_run, py_interop_table
-from matplotlib.backends.backend_pdf import PdfPages
 
 
-def plot_occupancy(run_folder, output_pdf="occupancy.pdf"):
+def plot_occupancy(run_folder: str, output_jpg_prefix="occupancy"):
+    """
+    To optimize loading concentrations on the NovaSeq platform, the % Occupied and % Pass Filter
+    metrics can be plotted to determine if a run was underloaded, optimally loaded, or overloaded.
+
+    More information:
+    https://support.illumina.com/bulletins/2020/03/plotting---occupied-by---pass-filter-to-optimize-loading-concent.html
+    """
 
     # Initialize interop objects
     run_metrics = py_interop_run_metrics.run_metrics()
@@ -32,7 +38,7 @@ def plot_occupancy(run_folder, output_pdf="occupancy.pdf"):
         column = columns[i]
         if column.has_children():
             headers.extend(
-                [column.name()+"("+subname+")" for subname in column.subcolumns()])
+                [f"{column.name()} ({subname})" for subname in column.subcolumns()])
         else:
             headers.append(column.name())
 
@@ -47,49 +53,40 @@ def plot_occupancy(run_folder, output_pdf="occupancy.pdf"):
     # Make a DataFrame
     df = pd.DataFrame(data, columns=headers)
 
-    # If there is no data
-    if df.shape[0] == 0:
+    # Skip if there is no data (% Occupied only available on NovaSeq)
+    if df.shape[0] == 0 or "% Occupied" not in df:
         # Stop
-        return
-
-    # % Occupied only available on NovaSeq
-    if "% Occupied" not in df:
         print("Occupancy plot skipped, no data available")
         return
 
-    # Otherwise
+    x = "% Occupied"
+    y = "% Pass Filter"
+    hues = ["Tile", "Lane", "Cycle", "Read"]
 
-    # Make a PDF
-    with PdfPages(output_pdf) as pdf:
+    # Make a few different types of plots
+    for hue in hues:
+        sns.scatterplot(
+            data=df,
+            x=x,
+            y=y,
+            hue=hue,
+            alpha=0.5,
+            linewidth=0,
+        )
+        plt.xlim([0, 100])
+        plt.ylim([0, 100])
+        plt.legend(title=hue, bbox_to_anchor=[1.2, 0.9])
+        plt.tight_layout()
+        plt.savefig(f"{output_jpg_prefix}_{hue.lower()}.jpg", dpi=600)
+        plt.close()
 
-        # Make a few different types of plots
-        for x, y, hue in [
-            ("% Occupied", "% Pass Filter", "Tile"),
-            ("% Occupied", "% Pass Filter", "Lane"),
-            ("% Occupied", "% Pass Filter", "Cycle"),
-            ("% Occupied", "% Pass Filter", "Read"),
-        ]:
-            g = sns.scatterplot(
-                data=df,
-                x=x,
-                y=y,
-                hue=hue,
-                alpha=0.5,
-                linewidth=0,
-            )
-            plt.xlim([0, 100])
-            plt.ylim([0, 100])
-            plt.legend(title=hue, bbox_to_anchor=[1.2, 0.9])
-            plt.tight_layout()
-            pdf.savefig(bbox_inches="tight")
-            plt.close()
 
 # If this file is being run as a standalone script
 if __name__ == "__main__":
 
     # Get the input file path from the first argument
     assert len(sys.argv) > 1, "Please provide input path"
-    run_folder = sys.argv[1]
-    assert os.path.exists(run_folder), f"Input path must exist ({run_folder})"
+    input_path = sys.argv[1]
+    assert os.path.exists(input_path), f"Input path must exist ({input_path})"
 
-    plot_occupancy(run_folder)
+    plot_occupancy(input_path)

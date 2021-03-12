@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-from interop import py_interop_run_metrics, py_interop_run
 import os
+import sys
+
+import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import sys
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_pdf import PdfPages
+from interop import py_interop_run_metrics, py_interop_run
 
 
-def plot_tile_intensity(run_folder):
+def plot_tile_intensity(run_folder: str, output_svg_prefix='max_intensity'):
 
     # Initialize interop objects
     run_metrics = py_interop_run_metrics.run_metrics()
@@ -64,25 +64,22 @@ def plot_tile_intensity(run_folder):
         
     df = pd.DataFrame(df)
 
-    # Make the plot
-    with PdfPages("max_intensity.pdf") as pdf:
+    # Iterate over lanes
+    for lane, lane_df in df.groupby('lane'):
 
-        # Iterate over lanes
-        for lane, lane_df in df.groupby('lane'):
+        # Plot the change in max intensity over cycles
+        sns.lineplot(
+            data=lane_df,
+            x='cycle',
+            y='max_intensity',
+        )
 
-            # Plot the change in max intensity over cycles
-            g = sns.lineplot(
-                data=lane_df,
-                x='cycle',
-                y='max_intensity',
-            )
+        # Set a title
+        plt.title(f"Lane {lane}")
 
-            # Set a title
-            plt.title(f"Lane {lane}")
-
-            # Save to the PDF
-            pdf.savefig()
-            plt.close()
+        # Save to the PDF
+        plt.savefig(f"{output_svg_prefix}_{lane}.svg")
+        plt.close()
 
 
 # If this file is being run as a standalone script
@@ -90,7 +87,7 @@ if __name__ == "__main__":
 
     # Get the input file path from the first argument
     assert len(sys.argv) > 1, "Please provide input path"
-    run_folder = sys.argv[1]
-    assert os.path.exists(run_folder), f"Input path must exist ({run_folder})"
+    input_path = sys.argv[1]
+    assert os.path.exists(input_path), f"Input path must exist ({input_path})"
 
-    plot_tile_intensity(run_folder)
+    plot_tile_intensity(input_path)

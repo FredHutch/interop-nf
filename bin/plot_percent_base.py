@@ -10,7 +10,7 @@ from interop import py_interop_run_metrics, py_interop_run, py_interop_plot
 logger = logging.getLogger(__name__)
 
 
-def plot_percent_base(run_folder: str, output_pdf="percent_base.pdf"):
+def plot_percent_base(run_folder: str, output_svg="percent_base.svg"):
     """
     Plots the base % across each cycle. Each line represents a different base.
     Reference lines are added for each read.
@@ -55,7 +55,7 @@ def plot_percent_base(run_folder: str, output_pdf="percent_base.pdf"):
     plt.xlim([axes_data.x().min(), axes_data.x().max()])
 
     # Save figure
-    plt.savefig(output_pdf)
+    plt.savefig(output_svg)
 
 
 # If this file is being run as a standalone script

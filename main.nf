@@ -45,9 +45,9 @@ process extractStats {
     output:
     file "run_metrics.json"
     file "run_metrics.html"
-    file "percent_base.pdf"
-    file "max_intensity.pdf"
-    file "occupancy.pdf" optional true
+    file "percent_base.svg"
+    file "max_intensity*.svg"
+    file "occupancy*.jpg" optional true
 
     """#!/bin/bash
 
