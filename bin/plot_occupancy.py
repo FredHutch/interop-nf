@@ -61,7 +61,7 @@ def plot_occupancy(run_folder: str, output_jpg_prefix="occupancy"):
 
     x = "% Occupied"
     y = "% Pass Filter"
-    hues = ["Tile", "Lane", "Cycle", "Read"]
+    hues = ["Tile", "Lane", "Cycle"]
 
     # Make a few different types of plots
     for hue in hues:
