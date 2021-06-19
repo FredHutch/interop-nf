@@ -39,4 +39,5 @@ jobs:
           unzip MiSeqDemo.zip
       - name: Test Pipeline
         run: |
-           nextflow run main.nf -c nextflow.config -profile testing -w work/ -with-docker ubuntu:latest --runDir MiSeqDemo/
+          nextflow run main.nf -c nextflow.config -profile testing -w work/ -with-docker ubuntu:latest --runDir MiSeqDemo/ --reportsDir output
+          test -f output/run_metrics.json

@@ -7,7 +7,7 @@ import sys
 import pandas as pd
 from interop import py_interop_run_metrics, py_interop_run, py_interop_summary
 
-from column_def import ColumnDef
+from bin.column_def import ColumnDef
 
 logger = logging.getLogger(__name__)
 
