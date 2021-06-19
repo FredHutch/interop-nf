@@ -24,7 +24,7 @@ The run folder must contain the `InterOp/` folder and the `RunInfo.xml` and `Run
 
 ## Workflow output
 
-View more [here](sample_output/README.md).
+[View more info here](sample_output/README.md).
 
 ## Other information
 
