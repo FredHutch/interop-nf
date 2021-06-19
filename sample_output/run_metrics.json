@@ -1,0 +1,92 @@
+{
+  "runSummary": [
+    {
+      "Level": "Read 1",
+      "Yield Total (G)": 9.38,
+      "Projected Yield (G)": 9.38,
+      "% Aligned": 99.2,
+      "Error Rate": 1.53,
+      "Intensity C1": 228,
+      "% >= Q30": 93.42,
+      "% Occupied": null
+    },
+    {
+      "Level": "Read 2",
+      "Yield Total (G)": 9.38,
+      "Projected Yield (G)": 9.38,
+      "% Aligned": 96.89,
+      "Error Rate": 1.92,
+      "Intensity C1": 226,
+      "% >= Q30": 84.43,
+      "% Occupied": null
+    },
+    {
+      "Level": "Non-Indexed Total",
+      "Yield Total (G)": 18.77,
+      "Projected Yield (G)": 18.77,
+      "% Aligned": 98.05,
+      "Error Rate": 1.73,
+      "Intensity C1": 227,
+      "% >= Q30": 88.92,
+      "% Occupied": null
+    },
+    {
+      "Level": "Total",
+      "Yield Total (G)": 18.77,
+      "Projected Yield (G)": 18.77,
+      "% Aligned": 98.05,
+      "Error Rate": 1.73,
+      "Intensity C1": 227,
+      "% >= Q30": 88.92,
+      "% Occupied": null
+    }
+  ],
+  "reads": [
+    [
+      {
+        "Lane": 1,
+        "Tiles": 38,
+        "Density": "1362 +/- 44",
+        "Cluster PF": "93.56 +/- 0.52",
+        "Legacy Phasing/Prephasing rate": "0.134 / 0.035",
+        "Phasing Slope/offset": "nan / nan",
+        "Prephasing Slope/offset": "nan / nan",
+        "Reads": 33.43,
+        "Reads PF": 31.28,
+        "% >= Q30": 93.42,
+        "Yield": 9.38,
+        "Cycles Error": 300,
+        "Aligned": "99.2 +/- 0.02",
+        "Error": "1.53 +/- 0.08",
+        "Error (35)": "0.11 +/- 0.0",
+        "Error (50)": "0.13 +/- 0.01",
+        "Error (100)": "0.23 +/- 0.01",
+        "Intensity C1": "228 +/- 23",
+        "% Occupied": "nan +/- nan"
+      }
+    ],
+    [
+      {
+        "Lane": 1,
+        "Tiles": 38,
+        "Density": "1362 +/- 44",
+        "Cluster PF": "93.56 +/- 0.52",
+        "Legacy Phasing/Prephasing rate": "0.137 / 0.045",
+        "Phasing Slope/offset": "nan / nan",
+        "Prephasing Slope/offset": "nan / nan",
+        "Reads": 33.43,
+        "Reads PF": 31.28,
+        "% >= Q30": 84.43,
+        "Yield": 9.38,
+        "Cycles Error": 300,
+        "Aligned": "96.89 +/- 0.18",
+        "Error": "1.92 +/- 0.14",
+        "Error (35)": "0.17 +/- 0.04",
+        "Error (50)": "0.22 +/- 0.03",
+        "Error (100)": "0.38 +/- 0.02",
+        "Intensity C1": "226 +/- 19",
+        "% Occupied": "nan +/- nan"
+      }
+    ]
+  ]
+}
