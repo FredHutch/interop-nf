@@ -1,4 +1,4 @@
-name: Run Python Tests
+name: Run tests
 on: [push, pull_request]
 
 jobs:
@@ -44,4 +44,8 @@ jobs:
       - name: Test Pipeline
         run: |
           nextflow run main.nf -c nextflow.config -profile testing -w work/ -with-docker ubuntu:latest --runDir MiSeqDemo/ --reportsDir output
+          ls -l output/
           test -f output/run_metrics.json
+          test -f output/percent_base.svg
+          cat output/run_metrics.json
+
