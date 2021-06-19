@@ -2,7 +2,7 @@ name: Run tests
 on: [push, pull_request]
 
 jobs:
-  test:
+  unit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,8 +25,13 @@ jobs:
           python -m pytest tests --doctest-modules -o junit_family=xunit2 \
             --junitxml=junit/test-results.xml \
             --cov=bin tests/ --cov-report xml:junit/coverage.xml
+      - name: publish coverage
+        uses: codecov/codecov-action@v1
+        with:
+          directory: junit/
+          files: coverage.xml
 
-  integration-test:
+  integration:
     runs-on: ubuntu-latest
     env:
       NXF_ANSI_LOG: 0
