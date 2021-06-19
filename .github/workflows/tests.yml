@@ -23,12 +23,11 @@ jobs:
           pip install pytest
           pip install pytest-cov pylint
           python -m pytest tests --doctest-modules -o junit_family=xunit2 \
-            --junitxml=junit/test-results.xml \
-            --cov=bin tests/ --cov-report xml:junit/coverage.xml
+            --junitxml=test-results.xml \
+            --cov=bin tests/ --cov-report xml:coverage.xml
       - name: publish coverage
         uses: codecov/codecov-action@v1
         with:
-          directory: junit/
           files: coverage.xml
 
   integration:
