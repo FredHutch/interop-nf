@@ -1,6 +1,6 @@
 # InterOp QC Reporting - Nextflow
 
-Workflow used to generate QC metrics from the output of an Illumina sequencing run
+Workflow used to generate QC metrics from the output of an Illumina sequencing run.
 
 [![Run tests](https://github.com/FredHutch/interop-nf/actions/workflows/tests.yml/badge.svg)](https://github.com/FredHutch/interop-nf/actions/workflows/tests.yml)
 
@@ -24,7 +24,7 @@ The run folder must contain the `InterOp/` folder and the `RunInfo.xml` and `Run
 
 ## Workflow output
 
-View more [here](sample_output/README.md).
+[View more info here](sample_output/README.md).
 
 ## Other information
 
