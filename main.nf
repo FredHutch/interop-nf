@@ -7,6 +7,7 @@ nextflow.enable.dsl=2
 params.runDir = false
 params.reportsDir = false
 params.help = false
+params.container__interop = "quay.io/hdc-workflows/python-interop"
 
 // Command to print the help message
 def helpMessage() {
@@ -33,7 +34,7 @@ if (params.help || params.runDir == false || params.reportsDir == false){
 
 // DEFINE PROCESSES
 process extractStats {
-    container "quay.io/hdc-workflows/python-interop"
+    container "${params.container__interop}"
     label 'io_limited'
     errorStrategy 'finish'
     publishDir "${params.reportsDir}", mode: 'copy', overwrite: true
