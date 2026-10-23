@@ -44,11 +44,11 @@ process extractStats {
     path interop_inputs, stageAs: 'runDir/InterOp/'
 
     output:
-    file "run_metrics.json"
-    file "run_metrics.html"
-    file "percent_base.svg"
-    file "max_intensity*.svg"
-    file "occupancy*.jpg" optional true
+    path "run_metrics.json"
+    path "run_metrics.html"
+    path "percent_base.svg"
+    path "max_intensity*.svg"
+    path "occupancy*.jpg", optional: true
 
     """#!/bin/bash
 
